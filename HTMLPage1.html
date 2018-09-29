@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<script>
+    function todo($scope) {
+        $scope.data = [];
+        $scope.add = function () {
+            if ($scope.input != 0) {
+                $scope.data.push({ input: $scope.input, done: false });
+                $scope.input = "";
+                $scope.myValue = true;
+            }
+        }
+    }
+    var MyApp = angular.module("MyApp", []);
+    MyApp.controller("todo", todo);
+    
+</script>
+<body ng-app="MyApp">
+    <div  id="todolist">
+        <div ng-controller="todo">
+            <h2>TO DO LIST</h2><br />
+            <input ng-model="input" type="text"  id="data" />
+            <input type="button" value="ADD" ng-click="add()" id="add" />
+        </div>
+        <div ng-repeat="x in data">
+            <input type="checkbox" ng-model="x.done" ng-show="myValue" /><span ng-bind="x.todoText"></span>
+
+        </div>
+    </div>
+</body>
+</html>
