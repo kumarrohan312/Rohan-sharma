@@ -5,32 +5,35 @@
     <meta charset="utf-8" />
     <title></title>
 </head>
-<script>
-    function todo($scope) {
-        $scope.data = [];
-        $scope.add = function () {
-            if ($scope.input != 0) {
-                $scope.data.push({ input: $scope.input, done: false });
-                $scope.input = "";
-                $scope.myValue = true;
-            }
-        }
-    }
-    var MyApp = angular.module("MyApp", []);
-    MyApp.controller("todo", todo);
+<script src="C:\Users\ROHAN\Desktop\angulartodolist\Scripts\angular.min.js"> 
+    
     
 </script>
-<body ng-app="MyApp">
-    <div  id="todolist">
-        <div ng-controller="todo">
-            <h2>TO DO LIST</h2><br />
-            <input ng-model="input" type="text"  id="data" />
-            <input type="button" value="ADD" ng-click="add()" id="add" />
-        </div>
-        <div ng-repeat="x in data">
+<body ng-app="MyApp"ng-controller="todo">
+    
+            
+    <h2>TO DO LIST</h2><br />
+    <input ng-model="todoInput" type="text"  id="data" />
+    <input type="button" value="ADD" ng-click="todoAdd()" id="add" />
+        
+ <div ng-repeat="x in todoList">
             <input type="checkbox" ng-model="x.done" ng-show="myValue" /><span ng-bind="x.todoText"></span>
 
-        </div>
-    </div>
+ </div>
+  
+<script>
+    var MyApp = angular.module('MyApp', []);
+    MyApp.controller('todo', function ($scope) {
+        $scope.todoList = [];
+        $scope.todoAdd = function () {
+            if ($scope.todoInput != "") {
+                $scope.todoList.push({ todoText: $scope.todoInput, done: false });
+                $scope.todoInput = "";
+                $scope.myValue = true;
+            }
+        };
+    });
+
+</script>
 </body>
 </html>
