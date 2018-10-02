@@ -4,36 +4,71 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <style type="text/css">
+        body {
+            background-image: url(img.jpg);
+            background-size:cover;
+            background-attachment:fixed;
+        }
+        .content{
+            width:60%;
+            padding:40px;
+            margin:100px auto;
+            font-family:Calibri
+        }
+
+       }
+        
+    </style>
 </head>
 <script src="C:\Users\ROHAN\Desktop\angulartodolist\Scripts\angular.min.js"> 
     
     
 </script>
-<body ng-app="MyApp"ng-controller="todo">
-    
+<body ng-app="MyApp" ng-controller="todo" align="center">
+
+    <p align="center">
+        <h2><font  size="50" color="white" face="arial"><u>TO DO LIST</h2></u><br /></font>
+        <input ng-model="todoInput" size="20" type="text" id="data" />
+        <input type="button" value="ADD" ng-click="todoAdd()" id="add" />
+        <button  ng-click="remove()">Remove marked</button>
+
+        <div ng-repeat="x in todoList">
             
-    <h2>TO DO LIST</h2><br />
-    <input ng-model="todoInput" type="text"  id="data" />
-    <input type="button" value="ADD" ng-click="todoAdd()" id="add" />
-        
- <div ng-repeat="x in todoList">
-            <input type="checkbox" ng-model="x.done" ng-show="myValue" /><span ng-bind="x.todoText"></span>
+                <font size=" 20 " color="white" face="italic">
+                    <h5>
+                        
+                            <span ng-bind="x.todoText"></span>          
+                            <input type="checkbox" size="20"  ng-model="x.done" ng-show="myValue" />
+                        
+                    </h5>
+                </font>
 
- </div>
-  
-<script>
-    var MyApp = angular.module('MyApp', []);
-    MyApp.controller('todo', function ($scope) {
-        $scope.todoList = [];
-        $scope.todoAdd = function () {
-            if ($scope.todoInput != "") {
-                $scope.todoList.push({ todoText: $scope.todoInput, done: false });
-                $scope.todoInput = "";
-                $scope.myValue = true;
-            }
-        };
-    });
+        </div>
 
-</script>
+
+        <script>
+            var MyApp = angular.module('MyApp', []);
+            MyApp.controller('todo', function ($scope) {
+                $scope.todoList = [];
+                $scope.todoAdd = function () {
+                    if ($scope.todoInput != "") {
+                        $scope.todoList.push({ todoText: $scope.todoInput, done: false });
+                        $scope.todoInput = "";
+                        $scope.myValue = true;
+                    }
+                };
+                $scope.remove = function () {
+                    var oldList = $scope.todoList;
+                    $scope.todoList = [];
+                    angular.forEach(oldList, function (x) {
+                        if (!x.done) $scope.todoList.push(x);
+                    });
+                };
+            });
+
+        </script>
+    </p>
+
 </body>
 </html>
